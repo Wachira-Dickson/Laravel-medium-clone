@@ -19,7 +19,7 @@ class PostFactory extends Factory
     {
         $title = fake()->sentence();
         return [
-            'images' => fake()->imageUrl(),
+            'image' => fake()->imageUrl(),
             'title' => $title,
             'slug' => str()->slug($title),
             'content' => fake()->paragraphs(5, true),
