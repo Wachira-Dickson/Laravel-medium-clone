@@ -5,18 +5,11 @@
 
                     <h1 class="text-3xl mb-4">{{ $post->title }}</h1>
                     <div class="flex gap-4">
-                        @if ($post->user->image)
-                            <img src="{{ $post->user->imageUrl() }}" alt="{{ $post->user->image }}" class="w-12 h-12 rounded-full">
-                        @else
-                            <img src="https://www.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_
-                            7074311.htm#fromView=keyword&page=1&position=10&uuid=2921cc04-dff3-40c7-9e93-5be9d789d428&"
-                            alt="Dummy Avatar" class="w-12 h-12 rounded-full">
-                        @endif
-
+                        <x-user-avatar :user="$post->user" />
                         <!-- User Avatar -->
                         <div>
                             <div class="flex gap-2">
-                                <h3> {{ $post->user->name }} </h3>
+                                <a href="{{ route('public-profile.show', $post->user) }}" class="hover:underline"> {{ $post->user->name }} </a>
                                 &middot;
                                 <a href="#" class="text-emerald-500">Follow</a>
                             </div>
