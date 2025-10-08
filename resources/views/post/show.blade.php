@@ -8,12 +8,16 @@
                         <x-user-avatar :user="$post->user" />
                         <!-- User Avatar -->
                         <div>
-                            <div class="flex gap-2">
+                            <x-follow-ctr :user="$post->user" class="flex gap-2">
                                 <a href="{{ route('public-profile.show', $post->user) }}" class="hover:underline"> {{ $post->user->name }} </a>
                                 &middot;
-                                <a href="#" class="text-emerald-500">Follow</a>
-                            </div>
+                                <button
+                                x-text="following ? 'unfollow' : 'Follow'" :class="following ? 'text-red-600' : 'text-emerald-600'"
+                                @click="follow()">
                             
+                            </button>
+                            </x-follow-ctr>
+
                             <div class="flex gap-2 text-gray-500 text-sm">
 
                                 {{ $post->readTime() }} min read                               
