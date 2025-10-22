@@ -17,7 +17,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->simplePaginate(5);
+        $user = auth()->user();
+
+        $query = Post::latest();
+        if($user) {
+            $ids = $user->following->pluck('users.id');
+            $query->whereIn('user_id', $ids);
+        }
+
+        $posts = $query->simplePaginate(5);
 
         return view('post.index', [
             'posts' => $posts,
@@ -92,7 +100,7 @@ class PostController extends Controller
 
     public function category(Category $category)
     {
-        $posts = $category->posts()->simplePaginate(5);
+        $posts = $category->posts()->latest()->simplePaginate(5);
 
         return view('post.index', [
             'posts' => $posts,
